@@ -1,0 +1,106 @@
+{
+    "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+    "type": "AdaptiveCard",
+    "version": "1.0",
+    "body": [
+      {
+        "type": "Container",
+        "items": [
+          {
+            "type": "TextBlock",
+            "text": "Webhooks and Connectors",
+            "weight": "bolder",
+            "size": "medium"
+          },
+          {
+            "type": "ColumnSet",
+            "columns": [            
+              {
+                "type": "Column",
+                "width": "stretch",
+                "items": [
+                  {
+                    "type": "TextBlock",
+                    "text": "ToDo Description",
+                    "weight": "bolder",
+                    "wrap": true
+                  }                
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "Container",
+        "items": [        
+          {
+            "type": "FactSet",
+            "facts": [
+              {
+                "title": "UserID:",
+                "value": "<USER_ID>"
+              },
+              {
+                "title": "Id:",
+                "value": "<ID>"
+              },
+              {
+                "title": "Title:",
+                "value": "<TITLE>"
+              },
+              {
+                "title": "Completed:",
+                "value": "<COMPLETED>"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "actions": [
+      {
+        "type": "Action.ShowCard",
+        "title": "Set due date",
+        "card": {
+          "type": "AdaptiveCard",
+          "version": "1.0",
+          "body": [
+            {
+              "type": "Input.Date",
+              "id": "dueDate"
+            }
+          ],
+          "actions": [
+            {
+              "type": "Action.Submit",
+              "title": "OK"
+            }
+          ]
+        }
+      },
+      {
+        "type": "Action.ShowCard",
+        "title": "Comment",
+        "card": {
+          "type": "AdaptiveCard",
+          "version": "1.0",
+          "body": [
+            {
+              "type": "Input.Text",
+              "id": "comment",
+              "isMultiline": true,
+              "placeholder": "Enter your comment"
+            }
+          ],
+          "actions": [
+            {
+              "type": "Action.Submit",
+              "title": "OK"
+            }
+          ]
+        }
+      }
+    ]
+  }
+  
