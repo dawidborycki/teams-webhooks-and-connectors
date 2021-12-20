@@ -1,17 +1,14 @@
 package db.teams.todos;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 
-import com.google.common.io.Resources;
 import com.microsoft.bot.schema.Activity;
 import com.microsoft.bot.schema.Attachment;
 import com.microsoft.bot.schema.Serialization;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.util.StringUtils;
@@ -32,6 +29,7 @@ public class ToDoController {
         // Split text at 'Id='
         var splittedText = activity.getText().split("Id=");            
 
+        // Return the id value (assuming the input string has the correct format)
         return splittedText[splittedText.length-1];
     }
 
@@ -58,6 +56,7 @@ public class ToDoController {
             adaptiveCardJson = StringUtils.replace(adaptiveCardJson, "<TITLE>", todo.getTitle());
             adaptiveCardJson = StringUtils.replace(adaptiveCardJson, "<COMPLETED>", String.valueOf(todo.getCompleted()));
 
+            // Create attachment
             Attachment attachment = new Attachment();
             attachment.setContentType("application/vnd.microsoft.card.adaptive");
             attachment.setContent(Serialization.jsonToTree(adaptiveCardJson));
@@ -68,7 +67,6 @@ public class ToDoController {
             e.printStackTrace();
             return new Attachment();
         }
-    
     }
     
     @PostMapping("/todos/")
@@ -76,7 +74,7 @@ public class ToDoController {
         // Get ToDo
         ToDo todo = GetToDoById(activity);
 
-        // Create adaptive card        
+        // Create adaptive card
         Attachment cardAttachment = createAdaptiveCardAttachment("card.json", todo);
 
         // Send response

@@ -2,7 +2,7 @@ package db.teams.todos;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class ToDo{
+public class ToDo {
     @JsonProperty("userId")
     public int getUserId() {
         return this.userId;
